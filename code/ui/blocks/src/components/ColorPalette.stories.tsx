@@ -76,3 +76,34 @@ export const NamedColors = () => (
     />
   </ColorPalette>
 );
+
+export const SortedColors = () => (
+  <ColorPalette>
+    <ColorItem
+      title="theme.color.greyscale"
+      subtitle="Some of the greys"
+      colors={[
+        {
+          title: '00',
+          value: '#ffffff',
+        },
+        {
+          title: '25',
+          value: '#bfbfbf',
+        },
+        {
+          title: '50',
+          value: '#7f7f7f',
+        },
+        {
+          title: '75',
+          value: '#404040',
+        },
+        {
+          title: '100',
+          value: '#000000',
+        },
+      ]}
+    />
+  </ColorPalette>
+);

@@ -132,7 +132,7 @@ const List = styled.div(({ theme }) => ({
   flexDirection: 'column',
 }));
 
-type Colors = string[] | { [key: string]: string };
+type Colors = string[] | { [key: string]: string } | Array<{ title: string; value: string }>;
 
 interface ColorItemProps {
   title: string;
@@ -140,15 +140,31 @@ interface ColorItemProps {
   colors: Colors;
 }
 
-function renderSwatch(color: string, index: number) {
-  return <Swatch key={`${color}-${index}`} title={color} background={color} />;
+function renderSwatch(color: string | { title: string; value: string }, index: number) {
+  if (typeof color === 'string')
+    return <Swatch key={`${color}-${index}`} title={color} background={color} />;
+  return <Swatch key={`${color.title}-${index}`} title={color.title} background={color.value} />;
 }
 
-function renderSwatchLabel(color: string, index: number, colorDescription?: string) {
+function renderSwatchLabel(
+  color: string | { title: string; value: string },
+  index: number,
+  colorDescription?: string
+) {
+  if (typeof color === 'string')
+    return (
+      <SwatchLabel key={`${color}-${index}`} title={color}>
+        <div>
+          {color}
+          {colorDescription && <span>{colorDescription}</span>}
+        </div>
+      </SwatchLabel>
+    );
+
   return (
-    <SwatchLabel key={`${color}-${index}`} title={color}>
+    <SwatchLabel key={`${color.title}-${index}`} title={color.title}>
       <div>
-        {color}
+        {color.title}
         {colorDescription && <span>{colorDescription}</span>}
       </div>
     </SwatchLabel>
